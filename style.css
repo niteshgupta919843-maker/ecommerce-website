@@ -385,3 +385,125 @@ html {
 }
 
 
+/* ---------------- MOBILE ---------------- */
+@media (max-width: 600px) {
+
+  /* Full width container */
+  .container {
+    width: 100%;
+    padding: 0 12px;
+  }
+
+  /* Header */
+  .header-inner {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .nav-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .search-shoes {
+    width: 100%;
+  }
+
+  /* Hero */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-image img {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Product Grid */
+  .products-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .product-card {
+    width: 100%;
+  }
+
+  /* Best Sellers */
+  .best-sellers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Services */
+  .services {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact Form */
+  .contact-form {
+    width: 100%;
+  }
+}
+
+
+/* ---------------- TABLET ---------------- */
+@media (max-width: 900px) {
+
+  .header-inner {
+    flex-wrap: wrap;
+  }
+
+  .nav-items {
+    gap: 15px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .best-sellers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* ---------------- SMALL LAPTOP ---------------- */
+@media (max-width: 1200px) {
+
+  .container {
+    width: 90%;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .best-sellers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* ---------------- LARGE SCREEN ---------------- */
+@media (min-width: 1400px) {
+  .container {
+    width: 1300px;
+    margin: 0 auto;
+  }
+}
+
+
+
