@@ -71,10 +71,14 @@ html {
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
+
 }
 
 .nav-items a:hover {
   color: #ffe55e;
+  background-color: rgb(8, 38, 49);
+  border-radius: 20px;
+  padding: 12px 20px;
 }
 
 /* Search Box */
@@ -92,16 +96,29 @@ html {
   padding: 6px 10px;
 }
 
-/* Cart Button */
-.nav-items button {
-  background: #ffe55e;
+.cart-btn {
+  background-color: #ece2e2;
+  color: rgb(15, 15, 15);
+  padding: 10px 20px;
   border: none;
-  padding: 8px 14px;
-  border-radius: 50%;
+  border-radius: 30px;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 20px;
-  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s ease;
 }
+
+.cart-btn i {
+  font-size: 18px;
+}
+
+.cart-btn:hover {
+  background-color: #efe4e4;
+  transform: translateY(-2px);
+}
+
 
 .nav-items button:hover {
   transform: scale(1.1);
@@ -156,20 +173,10 @@ html {
 }
 
 .btn:hover {
-  background: #ffe55e;
+  background: #156c85;
   color: black;
 }
 
-.btn-ghost {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-}
-
-.btn-ghost:hover {
-  background: white;
-  color: #2575fc;
-}
 
 /* Hero Image */
 .hero-image img {
@@ -228,6 +235,7 @@ html {
 .price {
   font-weight: bold;
   color: #2575fc;
+  
 }
 
 .product-actions {
@@ -237,15 +245,28 @@ html {
   flex-wrap: wrap;
 }
 
-.btn-outline {
+.btn{
   border: 2px solid #2575fc;
   color: #2575fc;
   background: none;
+  padding:  12px 20px;
+  background-color: skyblue;
 }
 
-.btn-outline:hover {
-  background: #2575fc;
+.btn-buy{
+   padding: 12px 70px;
+  background: white;
+    border: 2px solid #2575fc;
+    background-color:darkorange;
   color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-buy:hover{
+  background-color: darkred;
 }
 
 /* ===========================
@@ -280,6 +301,9 @@ html {
   border-radius: 15px;
 }
 
+.price{
+  color: red;
+}
 /* ===========================
      SERVICE SECTION
 =========================== */
@@ -504,6 +528,5 @@ html {
     margin: 0 auto;
   }
 }
-
 
 
