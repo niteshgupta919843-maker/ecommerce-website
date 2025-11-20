@@ -11,7 +11,7 @@ const addToCartButtons = document.querySelectorAll(".product-actions .btn:last-c
 addToCartButtons.forEach(btn => {
     btn.addEventListener("click", () => {
         cartCount++;
-        cartButton.textContent = "🛒 " + cartCount;
+        cartButton.textContent = "🛒 Cart " + cartCount;
         alert("Item added to cart!");
     });
 });
@@ -92,3 +92,22 @@ navLinks.forEach(link => {
   });
 });
 
+
+
+
+const form = document.getElementById('contact-form');
+const successMsg =  document.getElementById('successMsg');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault()  
+
+
+successMsg.textContent = "Your message was sent successfully!"
+successMsg.style.display = 'block'
+
+form.reset();
+
+setTimeout(()=>{
+    successMsg.style.display = 'none';
+} ,3000);
+});
