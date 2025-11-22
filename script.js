@@ -1,24 +1,114 @@
-const form = document.getElementById("contactForm");
-const response = document.getElementById("response");
 
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
+/* ================================================
+   1. ADD TO CART LOGIC
+================================================ */
+let cartCount = 0;
+const cartButton = document.querySelector(".nav-items button");
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const message = document.getElementById("message").value.trim();
+// All “Add to Cart” buttons
+const addToCartButtons = document.querySelectorAll(".product-actions .btn:last-child");
 
-  if (name && email && message) {
-    response.textContent = `Thank you, ${name}! Your message has been sent.`;
-    response.style.color = "green";
-    form.reset();
-  } else {
-    response.textContent = "Please fill out all fields.";
-    response.style.color = "red";
-  }
+addToCartButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        cartCount++;
+        cartButton.textContent = "🛒 Cart " + cartCount;
+        alert("Item added to cart!");
+    });
+});
 
-  // 4 seconds ke baad message hide ho jayega
-  setTimeout(() => {
-    response.textContent = "";
-  }, 4000);
+
+/* ================================================
+   2. SEARCH SYSTEM (LIVE PRODUCT FILTER)
+================================================ */
+const searchInput = document.querySelector(".input-shoes");
+const products = document.querySelectorAll(".product-card");
+
+searchInput.addEventListener("input", () => {
+    const value = searchInput.value.toLowerCase();
+
+    products.forEach(card => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        const desc = card.querySelector(".desc")?.textContent.toLowerCase() || "";
+
+        if (title.includes(value) || desc.includes(value)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
+
+
+/* ================================================
+   3. SMOOTH SCROLL FOR BUTTONS
+================================================ */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+
+        if (target) {
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    });
+});
+
+
+
+/* ================================================
+   4. BUY NOW → OPEN EMAIL WITH PRODUCT NAME
+================================================ */
+const buyBtns = document.querySelectorAll(".product-actions .btn:first-child");
+
+buyBtns.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        const productName = btn.closest(".product-card").querySelector("h3").textContent;
+
+        window.location.href = 
+        `mailto:orders@example.com?subject=Order%20${productName}`;
+    });
+});
+
+
+
+
+const navLinks = document.querySelectorAll('.nav-items a');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const targetId = this.getAttribute('href'); 
+    const targetSection = document.querySelector(targetId);
+
+    if (targetSection) {
+      targetSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  });
+});
+
+
+
+
+const form = document.getElementById('contact-form');
+const successMsg =  document.getElementById('successMsg');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault()  
+
+
+successMsg.textContent = "Your message was sent successfully!"
+successMsg.style.display = 'block'
+
+form.reset();
+
+setTimeout(()=>{
+    successMsg.style.display = 'none';
+} ,3000);
 });
