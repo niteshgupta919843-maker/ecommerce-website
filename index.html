@@ -11,48 +11,31 @@
 <body>
   
     <header class="site-header">
-      
         <div class="container header-inner">
-          
-         <img src="./logo.jpg" alt="Nitesh Shoes Logo" class="logo">  <a class="brand" href="#" > Nitesh <span>Shoes</span> 
-      </a>
-  
-      
-      <a class="brand" href="#" >
-      </a>
+            <img src="./logo.jpg" alt="Nitesh Shoes Logo" class="logo">
+            <a class="brand" href="#">Nitesh <span>Shoes</span></a>
 
+            <navbar class="nav-items">
+                <a href="#collections">Collections</a>
+                <a href="#best">Best-Sellers</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
 
-      
-      
-      
-      <navbar class="nav-items">
-      <a href="#collections">Collections </a>
-      <a href="#best">Best-Sellers</a>
-      <a href="#about"> About</a>
-      <a href="#contact"> Contact</a> 
-
-
-        <div class="search-shoes">
+                <div class="search-shoes">
                     <div class="search-icon">
-                        <i class="fa-solid fa-magnifying-glass" style="color: #939393;"></i>
+                        <i class="fa-solid fa-magnifying-glass" style="color:#939393;"></i>
                     </div>
-                    <input type="text" class="input-shoes" placeholder="Search for Footwear">
+                    <!-- 🔥 SEARCH INPUT MODIFIED -->
+                    <input type="text" id="searchInput" class="input-shoes" placeholder="Search for Footwear">
                 </div>
-              <button class="cart-btn">
-  <i class="fas fa-shopping-cart"></i> Cart
-</button>
 
-            </div>
-
-          
-      </navbar>
-
-     
+                <button class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                </button>
+            </navbar>
+        </div>
     </header>
- 
 
-
-    <main>
       <!-- Hero -->
      <section class="hero">
       <div class="container hero-grid">
@@ -68,7 +51,7 @@ Subtext: From running tracks to street walks — our shoes are made to move with
           </div>
         </div>
         <div class="hero-image">
-          <!-- Replace with your image: images/hero-shoe.jpg -->
+         
           <img src="./Shoes.jpg" />
         </div>
       </div>

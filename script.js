@@ -5,6 +5,7 @@
 let cartCount = 0;
 const cartButton = document.querySelector(".nav-items button");
 
+
 // All “Add to Cart” buttons
 const addToCartButtons = document.querySelectorAll(".product-actions .btn:last-child");
 
@@ -12,7 +13,7 @@ addToCartButtons.forEach(btn => {
     btn.addEventListener("click", () => {
         cartCount++;
         cartButton.textContent = "🛒 Cart " + cartCount;
-        alert("Item added to cart!");
+       
     });
 });
 
@@ -20,24 +21,24 @@ addToCartButtons.forEach(btn => {
 /* ================================================
    2. SEARCH SYSTEM (LIVE PRODUCT FILTER)
 ================================================ */
-const searchInput = document.querySelector(".input-shoes");
-const products = document.querySelectorAll(".product-card");
 
-searchInput.addEventListener("input", () => {
+const searchInput = document.getElementById("searchInput");
+const productCards = document.querySelectorAll(".product-card");
+
+searchInput.addEventListener("keyup", () => {
     const value = searchInput.value.toLowerCase();
 
-    products.forEach(card => {
-        const title = card.querySelector("h3").textContent.toLowerCase();
-        const desc = card.querySelector(".desc")?.textContent.toLowerCase() || "";
+    productCards.forEach(card => {
+        const name = card.querySelector("h3").textContent.toLowerCase();
+        const desc = card.querySelector(".desc").textContent.toLowerCase();
 
-        if (title.includes(value) || desc.includes(value)) {
+        if (name.includes(value) || desc.includes(value)) {
             card.style.display = "block";
         } else {
             card.style.display = "none";
         }
     });
 });
-
 
 /* ================================================
    3. SMOOTH SCROLL FOR BUTTONS
@@ -112,3 +113,4 @@ setTimeout(()=>{
     successMsg.style.display = 'none';
 } ,3000);
 });
+
