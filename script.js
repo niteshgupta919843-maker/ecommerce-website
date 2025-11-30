@@ -1,116 +1,124 @@
-
-/* ================================================
-   1. ADD TO CART LOGIC
-================================================ */
+/* ============================================
+   1. ADD TO CART SYSTEM
+============================================ */
 let cartCount = 0;
-const cartButton = document.querySelector(".nav-items button");
+const cartButton = document.querySelector(".cart-btn");
 
+document.querySelectorAll(".product-actions .btn:last-child").forEach(btn => {
+  btn.addEventListener("click", () => {
+    cartCount++;
+    cartButton.innerHTML = `🛒 Cart (${cartCount})`;
+    cartButton.classList.add("cart-pop");
 
-// All “Add to Cart” buttons
-const addToCartButtons = document.querySelectorAll(".product-actions .btn:last-child");
-
-addToCartButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        cartCount++;
-        cartButton.textContent = "🛒 Cart " + cartCount;
-       
-    });
+    setTimeout(() => cartButton.classList.remove("cart-pop"), 200);
+  });
 });
 
 
-/* ================================================
-   2. SEARCH SYSTEM (LIVE PRODUCT FILTER)
-================================================ */
-
+/* ============================================
+   2. SEARCH FILTER 
+============================================ */
 const searchInput = document.getElementById("searchInput");
-const productCards = document.querySelectorAll(".product-card");
+const cards = document.querySelectorAll(".product-card");
 
-searchInput.addEventListener("keyup", () => {
-    const value = searchInput.value.toLowerCase();
+searchInput.addEventListener("input", () => {
+  const val = searchInput.value.toLowerCase();
 
-    productCards.forEach(card => {
-        const name = card.querySelector("h3").textContent.toLowerCase();
-        const desc = card.querySelector(".desc").textContent.toLowerCase();
+  cards.forEach(card => {
+    const name = card.querySelector("h3").innerText.toLowerCase();
+    const desc = card.querySelector(".desc").innerText.toLowerCase();
 
-        if (name.includes(value) || desc.includes(value)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
+    card.style.display =
+      name.includes(val) || desc.includes(val) ? "block" : "none";
+  });
+});
+
+
+
+/* ============================================
+   3. SMOOTH SCROLL (NAV & BEST SELLERS FIXED)
+============================================ */
+document.querySelectorAll('a[href^="#"], .seller').forEach(link => {
+  link.addEventListener("click", function (e) {
+
+    // Only prevent default if it's a section link
+    if (this.tagName === "A" && this.getAttribute("href").startsWith("#")) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      target?.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Best seller card clicks
+    if (this.classList.contains("seller")) {
+      const productName = this.querySelector("strong").innerText.toLowerCase();
+
+      productCards.forEach(card => {
+        const name = card.querySelector("h3").innerText.toLowerCase();
+
+        if (name.includes(productName)) {
+          card.scrollIntoView({ behavior: "smooth", block: "center" });
+          card.classList.add("highlight");
+
+          setTimeout(() => card.classList.remove("highlight"), 1500);
         }
-    });
-});
-
-/* ================================================
-   3. SMOOTH SCROLL FOR BUTTONS
-================================================ */
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
-    });
-});
-
-
-
-/* ================================================
-   4. BUY NOW → OPEN EMAIL WITH PRODUCT NAME
-================================================ */
-const buyBtns = document.querySelectorAll(".product-actions .btn:first-child");
-
-buyBtns.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        const productName = btn.closest(".product-card").querySelector("h3").textContent;
-
-        window.location.href = 
-        `mailto:orders@example.com?subject=Order%20${productName}`;
-    });
-});
-
-
-
-
-const navLinks = document.querySelectorAll('.nav-items a');
-
-navLinks.forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    const targetId = this.getAttribute('href'); 
-    const targetSection = document.querySelector(targetId);
-
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
       });
     }
   });
 });
 
 
+/* ============================================
+   4. BUY NOW EMAIL FIXED
+============================================ */
+document.querySelectorAll(".btn-buy").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const productName = btn
+      .closest(".product-card")
+      .querySelector("h3").innerText;
 
-
-const form = document.getElementById('contact-form');
-const successMsg =  document.getElementById('successMsg');
-
-form.addEventListener('submit', function(e) {
-    e.preventDefault()  
-
-
-successMsg.textContent = "Your message was sent successfully!"
-successMsg.style.display = 'block'
-
-form.reset();
-
-setTimeout(()=>{
-    successMsg.style.display = 'none';
-} ,3000);
+    window.location.href =
+      `mailto:orders@example.com?subject=Order%20${encodeURIComponent(productName)}`;
+  });
 });
+
+/* ============================================
+   5. SCROLL ANIMATION
+============================================ */
+const animatedItems = document.querySelectorAll(".product-card, .service, .seller");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    } else {
+      // 🔥 REMOVE CLASS when going out → animation repeat
+      entry.target.classList.remove("show");
+    }
+
+  });
+}, { threshold: 0.3 });
+
+animatedItems.forEach(item => observer.observe(item));
+
+/* ============================================
+   6. CONTACT FORM FIXED
+============================================ */
+const form = document.getElementById("contact-form");
+const successMsg = document.getElementById("successMsg");
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  successMsg.innerText = "✅ Message sent successfully!";
+  successMsg.style.display = "block";
+
+  setTimeout(() => {
+    successMsg.style.display = "none";
+    form.reset();
+  }, 2500);
+});
+
+
+
 
